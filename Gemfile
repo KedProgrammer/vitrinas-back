@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.6'
+gem 'rails', '~> 5.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
@@ -15,7 +15,10 @@ gem 'puma', '~> 3.7'
 gem 'bcrypt'
 gem 'jwt'
 gem 'active_model_serializers'
+gem 'aasm'
 gem 'rack-cors', require: 'rack/cors'
+gem 'annotate'
+
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'

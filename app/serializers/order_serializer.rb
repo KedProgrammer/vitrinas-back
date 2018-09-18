@@ -14,10 +14,14 @@
 #  updated_at    :datetime         not null
 #
 
-require 'test_helper'
-
-class OrderTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+class OrderSerializer < ActiveModel::Serializer
+  attributes :id,
+            :bill_number,
+            :comments,
+            :aasm_state,
+            :client_name,
+            :client_number,
+            :total,
+            :initial_date,
+            :updated_at
 end
