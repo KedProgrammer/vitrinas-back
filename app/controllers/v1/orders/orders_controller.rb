@@ -5,9 +5,15 @@ class V1::Orders::OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.searh_orders_by_range(params[:start_date], params[:end_date]) if params[:start_date]
-    @orders = Order.search_orders(params[:date]) if params[:date]
-    render json: @orders
+    if params[:search].present?
+      @order = Order.find(params[:number].to_i) if params[:search].to_i == 0
+      @order = Order.find_by!(bill_number: params[:number]) if  params[:search].to_i == 1
+      render json: @order
+    else
+      @orders = Order.searh_orders_by_range(params[:start_date], params[:end_date]) if params[:start_date]
+      @orders = Order.search_orders(params[:date]) if params[:date]
+      render json: @orders
+    end
   end
 
   def update

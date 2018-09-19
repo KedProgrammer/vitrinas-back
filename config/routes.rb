@@ -5,6 +5,7 @@
 #               POST  /orders/orders(.:format)     v1/orders/orders#create
 #  orders_order PATCH /orders/orders/:id(.:format) v1/orders/orders#update
 #               PUT   /orders/orders/:id(.:format) v1/orders/orders#update
+#               GET   /orders/orders(.:format)     v1/orders/orders#show
 #    auth_login POST  /auth/login(.:format)        authentication#authenticate
 #        signup POST  /signup(.:format)            users#create
 

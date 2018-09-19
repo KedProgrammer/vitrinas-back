@@ -15,6 +15,8 @@
 #
 
 class Order < ApplicationRecord
+  validates :bill_number, uniqueness: { message: 'Numero de factura debe ser unico'}, on: :create
+  validate :validate_initial_date, on: :create
   include AASM
   aasm do
     state :en_proceso, initial: true
@@ -41,5 +43,10 @@ class Order < ApplicationRecord
   end
   def self.search_orders(date)
     where(initial_date: Date.parse(date).beginning_of_day..Date.parse(date).end_of_day)
+  end
+
+  private
+  def validate_initial_date
+    errors.add(:initial_date, message: "La fecha de factura no puede estar en el pasado") if initial_date < Date.today
   end
 end
