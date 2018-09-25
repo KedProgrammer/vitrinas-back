@@ -18,6 +18,7 @@ gem 'active_model_serializers'
 gem 'aasm'
 gem 'rack-cors', require: 'rack/cors'
 gem 'annotate'
+gem 'unicorn'
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
