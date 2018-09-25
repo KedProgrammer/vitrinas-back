@@ -10,7 +10,7 @@ default: &default
   pool: 5
   timeout: 5000
   username: shiriux
-  password: 123456
+  password: daniel1991
 
 development:
   <<: *default
