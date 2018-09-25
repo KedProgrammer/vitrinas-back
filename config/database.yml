@@ -30,4 +30,4 @@ production:
   timeout: 5000
   username: shiriux
   password: 123456
-  database: vitrinas_production
+  database: <%= ENV['APPNAME_DATABASE_PASSWORD'] %>
