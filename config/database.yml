@@ -10,7 +10,7 @@ default: &default
   pool: 5
   timeout: 5000
   username: shiriux
-  password: daniel1991
+  password: <%= ENV['DATA_BASE_PASSWORD_DEV'] %>
 
 development:
   <<: *default
@@ -29,5 +29,5 @@ production:
   pool: 5
   timeout: 5000
   username: shiriux
-  password: <%= ENV['APPNAME_DATABASE_PASSWORD'] %>
+  password: <%= ENV['DATA_BASE_PASSWORD'] %>
   database: vitrinas_production
