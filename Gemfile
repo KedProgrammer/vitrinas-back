@@ -19,7 +19,7 @@ gem 'aasm'
 gem 'rack-cors', require: 'rack/cors'
 gem 'annotate'
 gem 'unicorn'
-gem 'figaro'
+
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
