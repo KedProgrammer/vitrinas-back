@@ -35,6 +35,9 @@ module Orders
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.time_zone = 'Bogota'
+    Raven.configure do |config|
+      config.dsn = 'https://92399509823944ad9671da14280c30b8:9cbb20494c984f68844bf745b41d7451@sentry.io/1289158'
+    end
    
   end
 end

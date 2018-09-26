@@ -8,8 +8,7 @@ set :repo_url, "https://github.com/KedProgrammer/vitrinas-back.git"
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
- set :deploy_to, "/home/vitrinas/vitrinas-back"
->>>>>>> a1b7b5f0b36055a61e25e9f0b63854ebfe726a65
+ set :deploy_to, "~/vitrinas/vitrinas-back"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
