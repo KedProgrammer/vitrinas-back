@@ -15,6 +15,24 @@ ActiveRecord::Schema.define(version: 2018_09_18_172008) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "categories", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "expenses", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.decimal "amount"
+    t.date "date_expense"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "category_id"
+    t.integer "purchase_id"
+    t.index ["category_id"], name: "index_expenses_on_category_id"
+    t.index ["purchase_id"], name: "index_expenses_on_purchase_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.datetime "initial_date"
     t.bigint "bill_number"
@@ -27,6 +45,12 @@ ActiveRecord::Schema.define(version: 2018_09_18_172008) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "purchases", id: :serial, force: :cascade do |t|
+    t.string "name_purchases"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -35,4 +59,6 @@ ActiveRecord::Schema.define(version: 2018_09_18_172008) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "expenses", "categories"
+  add_foreign_key "expenses", "purchases"
 end
