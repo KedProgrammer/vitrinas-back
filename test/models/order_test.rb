@@ -12,6 +12,10 @@
 #  total         :bigint(8)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  place         :integer
+#  delivery_date :date
+#  seller_name   :string
+#  description   :text
 #
 
 require 'test_helper'

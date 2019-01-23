@@ -12,6 +12,10 @@
 #  total         :bigint(8)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  place         :integer
+#  delivery_date :date
+#  seller_name   :string
+#  description   :text
 #
 
 class OrderSerializer < ActiveModel::Serializer
@@ -23,5 +27,10 @@ class OrderSerializer < ActiveModel::Serializer
             :client_number,
             :total,
             :initial_date,
-            :updated_at
+            :updated_at,
+            :description,
+            :seller_name,
+            :description,
+            :order_number
+            :place
 end

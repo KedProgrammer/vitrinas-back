@@ -6,5 +6,6 @@ class OrdersSerializer < ActiveModel::Serializer
             :client_name,
             :client_number,
             :total,
-            :initial_date
+            :initial_date,
+            :order_number
 end

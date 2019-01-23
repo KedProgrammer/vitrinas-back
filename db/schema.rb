@@ -10,13 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_18_172008) do
+ActiveRecord::Schema.define(version: 2019_01_18_214831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", id: :serial, force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.string "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,6 +40,30 @@ ActiveRecord::Schema.define(version: 2018_09_18_172008) do
     t.index ["purchase_id"], name: "index_expenses_on_purchase_id"
   end
 
+  create_table "fees", force: :cascade do |t|
+    t.decimal "value"
+    t.string "capital_payment"
+    t.string "decimal"
+    t.decimal "interes_rate"
+    t.decimal "balance"
+    t.integer "fee_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "loan_id"
+    t.index ["loan_id"], name: "index_fees_on_loan_id"
+  end
+
+  create_table "loans", force: :cascade do |t|
+    t.decimal "amount", default: "0.0"
+    t.decimal "interes_rate", precision: 10, scale: 2, default: "0.0"
+    t.decimal "remaining_payment", default: "0.0"
+    t.decimal "paid_amount", default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "employee_id"
+    t.index ["employee_id"], name: "index_loans_on_employee_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.datetime "initial_date"
     t.bigint "bill_number"
@@ -43,6 +74,11 @@ ActiveRecord::Schema.define(version: 2018_09_18_172008) do
     t.bigint "total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "place"
+    t.date "delivery_date"
+    t.string "seller_name"
+    t.text "description"
+    t.integer "order_number"
   end
 
   create_table "purchases", id: :serial, force: :cascade do |t|
@@ -51,14 +87,35 @@ ActiveRecord::Schema.define(version: 2018_09_18_172008) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
+  end
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "role_id"
+    t.index ["role_id"], name: "index_users_roles_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+    t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
   add_foreign_key "expenses", "categories"
   add_foreign_key "expenses", "purchases"
+  add_foreign_key "fees", "loans"
+  add_foreign_key "loans", "employees"
 end
