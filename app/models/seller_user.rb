@@ -1,0 +1,3 @@
+class SellerUser < User
+ 
+end

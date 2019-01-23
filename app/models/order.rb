@@ -20,12 +20,12 @@
 
 class Order < ApplicationRecord
   enum place: %i[almacen produccion]
-  validates :bill_number,
-            uniqueness: { message: 'Numero de factura debe ser unico' },
+  validates :bill_number, :order_number,
+            uniqueness: { message: 'Numero de factura y/o numero de pedido debe ser unico' },
             on: :create
-  validates :description, :seller_name, :delivery_date, :place, :total,
+  validates :description, :seller_name, :delivery_date, :place,
             :client_number,
-            :client_name, :comments, :bill_number, :initial_date, presence: true
+            :client_name, :comments, :order_number, :initial_date, presence: true
   validate :validate_initial_date
   include AASM
   aasm do

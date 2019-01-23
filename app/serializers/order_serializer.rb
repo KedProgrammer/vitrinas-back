@@ -31,5 +31,6 @@ class OrderSerializer < ActiveModel::Serializer
             :description,
             :seller_name,
             :description,
+            :order_number
             :place
 end

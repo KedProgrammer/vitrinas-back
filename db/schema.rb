@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_212242) do
+ActiveRecord::Schema.define(version: 2019_01_18_214831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2018_12_03_212242) do
     t.date "delivery_date"
     t.string "seller_name"
     t.text "description"
+    t.integer "order_number"
   end
 
   create_table "purchases", id: :serial, force: :cascade do |t|
@@ -102,6 +103,7 @@ ActiveRecord::Schema.define(version: 2018_12_03_212242) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
