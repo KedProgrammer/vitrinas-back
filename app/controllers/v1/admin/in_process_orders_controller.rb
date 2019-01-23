@@ -1,4 +1,4 @@
-class V1::Admin::InProcessOrders < V1::Orders::OrdersController
+class V1::Admin::InProcessOrdersController < V1::Orders::OrdersController
   
   def update
     @order = Order.find(params[:id])
