@@ -13,9 +13,10 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  place         :integer
-#  delivery_date :date
+#  delivery_date :datetime
 #  seller_name   :string
 #  description   :text
+#  order_number  :integer
 #
 
 require 'test_helper'

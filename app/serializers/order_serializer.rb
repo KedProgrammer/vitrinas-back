@@ -13,9 +13,10 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  place         :integer
-#  delivery_date :date
+#  delivery_date :datetime
 #  seller_name   :string
 #  description   :text
+#  order_number  :integer
 #
 
 class OrderSerializer < ActiveModel::Serializer
@@ -25,12 +26,12 @@ class OrderSerializer < ActiveModel::Serializer
             :aasm_state,
             :client_name,
             :client_number,
-            :total,
             :initial_date,
             :updated_at,
             :description,
             :seller_name,
             :description,
-            :order_number
-            :place
+            :order_number,
+            :place,
+            :delivery_date
 end
