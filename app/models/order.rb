@@ -13,18 +13,18 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  place         :integer
-#  delivery_date :date
+#  delivery_date :datetime
 #  seller_name   :string
 #  description   :text
+#  order_number  :integer
 #
 
 class Order < ApplicationRecord
   enum place: %i[almacen produccion]
   validates :bill_number, :order_number,
-            uniqueness: { message: 'Numero de factura y/o numero de pedido debe ser unico' },
+            uniqueness: { message: 'Numero de factura y/o numero de pedido debe ser unico' },allow_nil: true,
             on: :create
   validates :description, :seller_name, :delivery_date, :place,
-            :client_number,
             :client_name, :comments, :order_number, :initial_date, presence: true
   validate :validate_initial_date
   include AASM
