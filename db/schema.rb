@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_220324) do
+ActiveRecord::Schema.define(version: 2019_07_04_174739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "categories", id: :serial, force: :cascade do |t|
+  create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
   end
 
   create_table "employees", force: :cascade do |t|
@@ -26,18 +27,6 @@ ActiveRecord::Schema.define(version: 2019_02_11_220324) do
     t.string "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "expenses", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.decimal "amount"
-    t.date "date_expense"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "category_id"
-    t.integer "purchase_id"
-    t.index ["category_id"], name: "index_expenses_on_category_id"
-    t.index ["purchase_id"], name: "index_expenses_on_purchase_id"
   end
 
   create_table "fees", force: :cascade do |t|
@@ -81,10 +70,25 @@ ActiveRecord::Schema.define(version: 2019_02_11_220324) do
     t.integer "order_number"
   end
 
-  create_table "purchases", id: :serial, force: :cascade do |t|
-    t.string "name_purchases"
+  create_table "product_row_materials", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "row_material_id"
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_row_materials_on_product_id"
+    t.index ["row_material_id"], name: "index_product_row_materials_on_row_material_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.decimal "cost"
+    t.integer "category_product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "row_material_summary"
+    t.decimal "profit_rate"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -95,6 +99,15 @@ ActiveRecord::Schema.define(version: 2019_02_11_220324) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
+  create_table "row_materials", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "category_row_material_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -114,8 +127,7 @@ ActiveRecord::Schema.define(version: 2019_02_11_220324) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  add_foreign_key "expenses", "categories"
-  add_foreign_key "expenses", "purchases"
   add_foreign_key "fees", "loans"
   add_foreign_key "loans", "employees"
+  add_foreign_key "product_row_materials", "products"
 end
