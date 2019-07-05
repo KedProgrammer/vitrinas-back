@@ -9,6 +9,7 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  category_row_material_id :integer
+#  unity                    :string
 #
 
 class RowMaterial < ApplicationRecord
