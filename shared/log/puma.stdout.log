@@ -1,0 +1,28 @@
+=== puma startup: 2018-09-25 20:51:18 +0000 ===
+[25952] * Starting control server on unix:///tmp/puma-status-1537908678107-25952
+[25952] - Worker 0 (pid: 25965) booted, phase: 0
+[25952] - Gracefully shutting down workers...
+[25952] === puma shutdown: 2018-09-25 20:51:40 +0000 ===
+[25952] - Goodbye!
+Exiting
+=== puma startup: 2018-09-25 20:56:11 +0000 ===
+[26003] * Starting control server on unix:///tmp/puma-status-1537908971196-26003
+[26003] - Worker 0 (pid: 26016) booted, phase: 0
+[26003] - Gracefully shutting down workers...
+[26003] === puma shutdown: 2018-09-25 20:56:19 +0000 ===
+[26003] - Goodbye!
+Exiting
+=== puma startup: 2018-09-25 20:59:14 +0000 ===
+[26551] * Starting control server on unix:///tmp/puma-status-1537909154199-26551
+[26551] - Worker 0 (pid: 26564) booted, phase: 0
+[26551] - Gracefully shutting down workers...
+[26551] === puma shutdown: 2018-09-25 20:59:16 +0000 ===
+[26551] - Goodbye!
+Exiting
+=== puma startup: 2018-09-25 21:09:37 +0000 ===
+[26704] * Starting control server on unix:///tmp/puma-status-1537909777559-26704
+[26704] - Worker 0 (pid: 26717) booted, phase: 0
+[26704] - Gracefully shutting down workers...
+[26704] === puma shutdown: 2018-09-25 21:09:42 +0000 ===
+[26704] - Goodbye!
+Exiting
