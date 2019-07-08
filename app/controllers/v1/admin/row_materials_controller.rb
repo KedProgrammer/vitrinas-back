@@ -3,8 +3,7 @@ class V1::Admin::RowMaterialsController < ApplicationController
   def update
     row_material = RowMaterial.find(params[:id])
     row_material.update!(row_material_params)
-    category_row_material = row_material.category_row_material
-    render json: category_row_material
+    render json: row_material
   end
 
   def create
