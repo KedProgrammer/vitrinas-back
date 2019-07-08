@@ -2,8 +2,9 @@ class V1::Admin::RowMaterialsController < ApplicationController
 
   def update
     row_material = RowMaterial.find([params[:id]])
-    row_material.update!(price: row_material_params[:price])
-    render json: row_material
+    row_material.update!(row_material_params)
+    category_row_material = row_material.category_row_material
+    render json: category_row_material
   end
 
   def create
@@ -15,6 +16,6 @@ class V1::Admin::RowMaterialsController < ApplicationController
   private
 
   def row_material_params
-    params.require(:row_material).permit(:price, :code, :unity, :name)
+    params.require(:row_material).permit(:price, :code, :unity, :name, :category_row_material_id)
   end
 end
