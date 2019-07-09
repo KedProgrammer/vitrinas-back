@@ -17,7 +17,8 @@ class ProductSerializer < ActiveModel::Serializer
   attributes :id,
              :name,
              :code,
-             :price,
-             :row_material_summary
+             :cost,
+             :row_material_summary,
+             :profit_rate
 
 end
