@@ -18,7 +18,7 @@ class Product < ApplicationRecord
   has_many :product_row_materials
   has_many :row_materials, through: :product_row_materials
   belongs_to :category_product
-  before_update :update_price, if: Proc.new { |p| p.profit_rate_changed? }
+  before_update :update_price
   serialize :row_material_summary, Array
 
   
