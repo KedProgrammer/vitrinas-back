@@ -29,6 +29,9 @@ class RowMaterial < ApplicationRecord
   end
 
   def update_price
-    products.each(&:update_price)
+    products.each do |product|
+      product.update_price
+      product.save!
+    end
   end
 end
