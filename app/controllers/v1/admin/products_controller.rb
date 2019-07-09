@@ -12,9 +12,15 @@ class V1::Admin::ProductsController < ApplicationController
     render json: products
   end
 
+  def create
+    category_product = CategoryProduct.find(params[:category_product_id])
+    category_product.products.create(product_params)
+    render json: category_product
+  end
+
 private 
 
 def product_params
-  params.require(:product).permit(:profit_rate)
+  params.require(:product).permit(:profit_rate, :name, :category_product_id, :code)
 end
 end

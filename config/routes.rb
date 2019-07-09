@@ -1,6 +1,6 @@
 # == Route Map
 #
-# I, [2019-07-08T09:05:48.503755 #6009]  INFO -- sentry: ** [Raven] Raven 2.7.4 ready to catch errors
+# I, [2019-07-08T21:53:22.454644 #19067]  INFO -- sentry: ** [Raven] Raven 2.7.4 ready to catch errors
 #                                           Prefix Verb  URI Pattern                                                                                Controller#Action
 #                                     admin_orders GET   /admin/orders(.:format)                                                                    v1/admin/orders#index
 #                                                  POST  /admin/orders(.:format)                                                                    v1/admin/orders#create
@@ -12,6 +12,11 @@
 #                                                  PUT   /admin/row_materials/:id(.:format)                                                         v1/admin/row_materials#update
 #                     admin_category_row_materials GET   /admin/category_row_materials(.:format)                                                    v1/admin/category_row_materials#index
 #                                                  POST  /admin/category_row_materials(.:format)                                                    v1/admin/category_row_materials#create
+#                  admin_category_product_products POST  /admin/category_products/:category_product_id/products(.:format)                           v1/admin/products#create
+#                                    admin_product PATCH /admin/products/:id(.:format)                                                              v1/admin/products#update
+#                                                  PUT   /admin/products/:id(.:format)                                                              v1/admin/products#update
+#                          admin_category_products GET   /admin/category_products(.:format)                                                         v1/admin/category_products#index
+#                                                  POST  /admin/category_products(.:format)                                                         v1/admin/category_products#create
 #                                       auth_login POST  /auth/login(.:format)                                                                      authentication#authenticate
 #                                           signup POST  /signup(.:format)                                                                          users#create
 
@@ -19,18 +24,21 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   scope module: :v1, constraints: ApiVersion.new('v1', true) do
     namespace :admin do
-      resources :orders, only: [:create, :index, :update]
+      resources :orders, only: %i[create index update]
       resources :products, only: [] do
-        resources :row_materials, only: [] do 
+        resources :row_materials, only: [] do
           resources :product_row_materials, only: [:create]
         end
       end
-      resources :category_row_materials, only: [:index, :create] do
+      resources :category_row_materials, only: %i[index create] do
         resources :row_materials, only: [:create]
         resources :row_materials, only: [:update], shallow: true
       end
+      resources :category_products, only: %i[index create] do
+        resources :products, only: [:create]
+        resources :products, only: [:update], shallow: true
+      end
     end
-    
   end
   post 'auth/login', to: 'authentication#authenticate'
   post 'signup', to: 'users#create'
