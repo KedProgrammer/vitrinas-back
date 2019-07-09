@@ -27,5 +27,6 @@ class ProductRowMaterial < ApplicationRecord
 
   def update_price
     product.update_price
+    product.save!
   end
 end
