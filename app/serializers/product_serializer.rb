@@ -11,6 +11,7 @@
 #  updated_at           :datetime         not null
 #  row_material_summary :string
 #  profit_rate          :decimal(, )
+#  price                :decimal(, )
 #
 
 class ProductSerializer < ActiveModel::Serializer
