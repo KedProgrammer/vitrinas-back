@@ -21,6 +21,7 @@ class ProductSerializer < ActiveModel::Serializer
              :cost,
              :row_material_summary,
              :profit_rate,
-             :category_product_id
+             :category_product_id,
+             :price
 
 end
