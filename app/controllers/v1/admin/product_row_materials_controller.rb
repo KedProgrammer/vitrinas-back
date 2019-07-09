@@ -3,7 +3,7 @@ class V1::Admin::ProductRowMaterialsController < ApplicationController
     product = Product.find(params[:product_id])
     row_material = RowMaterial.find(params[:row_material_id])
     product.product_row_materials.create(row_material: row_material, quantity: product_row_material[:quantity])
-    render json: product.row_materials
+    render json: product
   end
 
   private
