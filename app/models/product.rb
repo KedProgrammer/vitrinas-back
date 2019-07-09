@@ -20,8 +20,7 @@ class Product < ApplicationRecord
   after_update :update_price, if: proc { |p| p.profit_rate_changed? }
   serialize :row_material_summary, Array
 
-  private
-
+  
   def calculate_cost
     self.cost = product_row_materials.sum { |p| p.row_material.price * p.quantity }
     save!
