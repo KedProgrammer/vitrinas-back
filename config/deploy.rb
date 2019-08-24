@@ -1,6 +1,8 @@
 # config valid for current version and patch releases of Capistrano
+require 'capistrano/ext/multistage'
 lock "~> 3.11.0"
-
+set :stages, ["production"]
+set :default_stage, "production"
 set :application, "vitrinas-back"
 set :repo_url, "https://github.com/KedProgrammer/vitrinas-back.git"
 
