@@ -20,13 +20,6 @@ gem 'aasm'
 gem 'rack-cors', require: 'rack/cors'
 gem 'annotate'
 gem 'unicorn'
-gem 'capistrano', '~> 3.7', '>= 3.7.1'
-gem 'capistrano-rails', '~> 1.2'
-gem 'capistrano-bundler'
-gem 'capistrano-passenger', '~> 0.2.0'
-gem 'capistrano3-puma'
-
-gem 'capistrano-rvm'
 gem "sentry-raven"
 
 
@@ -47,6 +40,14 @@ gem "sentry-raven"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'capistrano', '~> 3.11'
+  gem 'capistrano-rvm'
+  gem 'capistrano-bundler', '~> 1.5', require: false
+  gem 'capistrano-rails', '~> 1.4', require: false
+  gem 'capistrano3-puma', '~> 3.1', '>= 3.1.1', require: false
+  gem 'capistrano3-nginx', '~> 3.0', '>= 3.0.1', require: false
+  gem 'capistrano-sidekiq', '~> 1.0', '>= 1.0.2', require: false
+  gem 'capistrano-rails-console', '~> 2.3', require: false
 end
 
 group :development do
