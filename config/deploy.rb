@@ -7,7 +7,6 @@ set :deploy_to, '/home/deploy/vitrinas-back'
 set :shared_path, '/home/deploy/vitrinas-back/shared'
 set :current_path, '/home/deploy/vitrinas-back/current'
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-set :linked_files, %w(config/database.yml config/application.yml public/cache.json)
 set :puma_threads, [4, 16]
 set :puma_workers, 6
 set :puma_bind, "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
