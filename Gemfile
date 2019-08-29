@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.5.1'
+ruby '2.3.3'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -40,9 +40,8 @@ gem "sentry-raven"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capistrano', '~> 3.11'
-  gem 'capistrano-rvm'
+  gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4', require: false
   gem 'capistrano-bundler', '~> 1.5', require: false
   gem 'capistrano-rails', '~> 1.4', require: false
   gem 'capistrano3-puma', '~> 3.1', '>= 3.1.1', require: false
