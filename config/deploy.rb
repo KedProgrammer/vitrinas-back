@@ -22,6 +22,7 @@ set :rvm_ruby_version, 'ruby-2.5.1' # Edit this if you are using MRI Ruby
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
+
   task :make_dirs do
     on roles(:app) do
       execute "mkdir #{shared_path}/tmp/sockets -p"
@@ -33,11 +34,12 @@ namespace :puma do
 end
 
 namespace :deploy do
-  desc "Make sure local git is in sync with remote."
+  desc 'Make sure local git is in sync with remote.'
+
   task :check_revision do
     on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/master`
-        puts "WARNING: HEAD is not the same as origin/master"
+      unless `git rev-parse HEAD` == `git rev-parse origin/#{fetch(:branch)}`
+        puts "WARNING: HEAD is not the same as origin/#{fetch(:branch)}"
         puts "Run `git push` to sync changes."
         exit
       end
@@ -47,7 +49,7 @@ namespace :deploy do
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
-      before 'deploy:restart', 'puma:start'
+      before 'deploy:restart', 'nginx:start', 'puma:nginx_config'
       invoke 'deploy'
     end
   end
@@ -55,12 +57,74 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
+      invoke 'nginx:restart'
     end
   end
 
-  before :starting,     :check_revision
-  after  :finishing,    :compile_assets
-  after  :finishing,    :cleanup
-  after  :finishing,    :restart
+  # desc 'Update crontab with whenever'
+  # task :update_cron do
+  #   on roles(:app) do
+  #     within current_path do
+  #       execute :bundle, :exec, "whenever --update-crontab #{fetch :whenever_identifier}"
+  #     end
+  #   end
+  # end
+
+  task :tmp_folder do
+    on roles(:app) do
+      within '/tmp' do
+        execute :mkdir, '-p pids'
+        execute :mkdir, '-p sockets'
+      end
+    end
+  end
+
+  # desc 'Add symbolic link to npm gulp, critical and axios'
+  # task :link_node_modules do
+  #   on roles(:app) do
+  #     within current_path do
+  #       execute :exec, 'npm link gulp'
+  #       execute :exec, 'npm link critical'
+  #       execute :exec, 'npm link axios'
+  #     end
+  #   end
+  # end
+
+  # desc 'Optimize Application CSS to AyendaRooms'
+  # task :optimize_application_css do
+  #   on roles(:app) do
+  #     within current_path do
+  #       execute :exec, 'gulp build-home'
+  #       execute :exec, 'gulp build-hotel'
+  #       execute :exec, 'gulp build-hotels'
+  #     end
+  #   end
+  # end
+
+  before :starting,  :check_revision
+  # after :finishing, :compile_assets
+  after :finishing, :cleanup
+  after :finishing, :restart
+  # after :finishing, :update_cron
+  after :finishing, :tmp_folder
+  # after :finishing, :link_node_modules
+  # before :finished, :optimize_application_css
+end
+
+namespace :log do
+  task :app do
+    on roles(:app) do
+      within current_path do
+        execute :bundle, :exec, "tail -f -n 500 log/#{fetch(:stage)}.log"
+      end
+    end
+  end
+
+  task :sidekiq do
+    on roles(:app) do
+      within current_path do
+        execute :bundle, :exec, "tail -f -n 500 log/sidekiq.log"
+      end
+    end
+  end
 end
