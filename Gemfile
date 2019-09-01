@@ -13,7 +13,7 @@ gem 'rails', '~> 5.2.1'
 gem 'pg'
 gem "rolify"
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma'
 gem 'bcrypt'
 gem 'jwt'
 gem 'active_model_serializers'
@@ -45,7 +45,7 @@ group :development, :test do
   gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4', require: false
   gem 'capistrano-bundler', '~> 1.5', require: false
   gem 'capistrano-rails', '~> 1.4', require: false
-  gem 'capistrano3-puma', '~> 3.1', '>= 3.1.1', require: false
+  gem 'capistrano3-puma', github: "seuros/capistrano-puma"
   gem 'capistrano3-nginx', '~> 3.0', '>= 3.0.1', require: false
   gem 'capistrano-sidekiq', '~> 1.0', '>= 1.0.2', require: false
   gem 'capistrano-rails-console', '~> 2.3', require: false
