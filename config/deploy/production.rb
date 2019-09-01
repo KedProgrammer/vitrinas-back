@@ -3,7 +3,7 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-server "18.223.247.60", user: "deploy"
+server "18.223.247.60", user: "ubuntu"
 
 role :app, fetch(:connection)
 role :web, fetch(:connection)
