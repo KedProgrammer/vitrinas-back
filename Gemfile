@@ -23,6 +23,7 @@ gem 'annotate'
 gem 'unicorn'
 gem "sentry-raven"
 gem 'pry'
+gem 'aws'
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

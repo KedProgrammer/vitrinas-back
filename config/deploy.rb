@@ -3,9 +3,9 @@ lock '3.11.0'
 set :application, 'vitrinas-back-capistrano'
 set :repo_url, 'git@github.com:KedProgrammer/vitrinas-back.git'
 set :global_shared_files, %w(public/uploads)
-set :deploy_to, "/home/ubuntu/#{fetch(:application)}"
-set :shared_path, "/home/ubuntu/#{fetch(:application)}/shared"
-set :current_path, "/home/ubuntu/#{fetch(:application)}/current"
+set :deploy_to, "/home/ubuntu/vitrinas-back-capistrano"
+set :shared_path, "/home/ubuntu/vitrinas-back-capistrano/shared"
+set :current_path, "/home/ubuntu/vitrinas-back-capistrano/current"
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 set :puma_threads, [4, 16]
 set :puma_workers, 6
@@ -22,6 +22,11 @@ set :rvm_ruby_version, 'ruby-2.5.1' # Edit this if you are using MRI Ruby
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
+
+  task :start do
+    run "/etc/init.d/puma start #{application}"
+  end
+  
 
   task :make_dirs do
     on roles(:app) do
