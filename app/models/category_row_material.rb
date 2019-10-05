@@ -9,7 +9,7 @@
 #  type       :string
 #
 
-class CategoryRowMaterial < Category 
+class CategoryRowMaterial < Category
   default_scope { includes(:row_materials) }
   has_many :row_materials
 
