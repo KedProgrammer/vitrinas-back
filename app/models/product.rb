@@ -28,7 +28,7 @@ class Product < ApplicationRecord
   end
 
   def update_summary
-    self.row_material_summary = product_row_materials.inject([]) { |array, f| array.push(f.row_material.attributes.merge(quantity: f.quantity)) }
+    self.row_material_summary = product_row_materials.inject([]) { |array, f| array.push(f.row_material.attributes.merge(quantity: f.quantity, product_row_material_id: f.id)) }
     save!
   end
 
