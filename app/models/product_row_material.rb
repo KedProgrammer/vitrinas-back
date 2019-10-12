@@ -14,6 +14,7 @@ class ProductRowMaterial < ApplicationRecord
   belongs_to :product
   belongs_to :row_material
   after_save :update_product_cost, :update_summary, :update_price
+  after_destroy :update_product_cost, :update_summary, :update_price
 
   private
 
