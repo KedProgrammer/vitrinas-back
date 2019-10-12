@@ -12,6 +12,13 @@ class V1::Admin::ProductRowMaterialsController < ApplicationController
     render json: product_row_material.product
   end
 
+  def destroy
+    product_row_material = ProductRowMaterial.find(params[:id])
+    product = product_row_material.product
+    product_row_material.destroy
+    render json: product
+  end
+
   private
 
   def product_row_materials_params
