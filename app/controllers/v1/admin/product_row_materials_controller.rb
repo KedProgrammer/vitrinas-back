@@ -9,7 +9,7 @@ class V1::Admin::ProductRowMaterialsController < ApplicationController
   def update
     product_row_material = ProductRowMaterial.find(params[:id])
     product_row_material.update!(product_row_materials_params)
-    render json: product_row_material
+    render json: product_row_material.product
   end
 
   private
