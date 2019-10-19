@@ -2,7 +2,8 @@ class V1::Admin::ProductsController < ApplicationController
   def update
     product = Product.find(params[:id])
     product.update!(product_params)
-    render json: product
+    categories = CategoryProduct.all
+    render json: categories
   end
 
   def update_all
@@ -14,7 +15,8 @@ class V1::Admin::ProductsController < ApplicationController
   def create
     category_product = CategoryProduct.find(params[:category_product_id])
     category_product.products.create(product_params)
-    render json: category_product
+    categories = CategoryProduct.all
+    render json: categories
   end
 
   def destroy
