@@ -19,9 +19,9 @@ class V1::Admin::ProductsController < ApplicationController
 
   def destroy
     product = Product.find(params[:id])
-    category_product = product.category_product
+    categories = CategoryProduct.all
     product.destroy
-    render json: category_product
+    render json: categories
   end
 
 private 
