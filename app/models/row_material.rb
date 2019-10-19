@@ -14,7 +14,7 @@
 
 class RowMaterial < ApplicationRecord
   belongs_to :category_row_material
-  has_many :product_row_materials
+  has_many :product_row_materials, dependent: :destroy
   has_many :products, through: :product_row_materials
   after_update :update_product_cost, :update_summary, :update_price
 

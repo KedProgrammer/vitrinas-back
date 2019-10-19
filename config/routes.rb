@@ -31,12 +31,12 @@ Rails.application.routes.draw do
       resources :products, only: [] do
         resources :row_materials, only: [] do
           resources :product_row_materials, only: [:create]
-          resources :product_row_materials, only: [:update, :destroy], shallow: true
+          resources :product_row_materials, only: %i[update destroy], shallow: true
         end
       end
       resources :category_row_materials, only: %i[index create] do
         resources :row_materials, only: [:create]
-        resources :row_materials, only: [:update], shallow: true
+        resources :row_materials, only: %i[update destroy], shallow: true
       end
       resources :category_products, only: %i[index create] do
         resources :products, only: [:create]
