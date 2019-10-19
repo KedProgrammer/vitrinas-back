@@ -40,7 +40,7 @@ Rails.application.routes.draw do
       end
       resources :category_products, only: %i[index create] do
         resources :products, only: [:create]
-        resources :products, only: [:update], shallow: true
+        resources :products, only: %i[update destroy], shallow: true
       end
     end
   end

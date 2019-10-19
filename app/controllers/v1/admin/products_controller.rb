@@ -17,6 +17,13 @@ class V1::Admin::ProductsController < ApplicationController
     render json: category_product
   end
 
+  def destroy
+    product = Product.find(params[:id])
+    category_product = product.category_product
+    product.destroy
+    render json: category_product
+  end
+
 private 
 
 def product_params
