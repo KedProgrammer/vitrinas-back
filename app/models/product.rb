@@ -21,7 +21,6 @@ class Product < ApplicationRecord
   before_update :update_price, if: Proc.new { |p| p.profit_rate_changed? }
   serialize :row_material_summary, Array
 
-  
   def calculate_cost
     self.cost = product_row_materials.sum { |p| p.row_material.price * p.quantity }
     save!
@@ -33,6 +32,6 @@ class Product < ApplicationRecord
   end
 
   def update_price
-    self.price = cost * (1 + profit_rate)
+    self.price = cost * (1 + (profit_rate / 100).to_f)
   end
 end

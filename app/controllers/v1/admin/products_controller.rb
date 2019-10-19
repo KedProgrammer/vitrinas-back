@@ -1,5 +1,4 @@
 class V1::Admin::ProductsController < ApplicationController
-
   def update
     product = Product.find(params[:id])
     product.update!(product_params)
@@ -7,7 +6,7 @@ class V1::Admin::ProductsController < ApplicationController
   end
 
   def update_all
-    products = Product.all 
+    products = Product.all
     products.update_all(product_params)
     render json: products
   end
