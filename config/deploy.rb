@@ -56,7 +56,7 @@ namespace :puma do
   before :start, :make_dirs
 end
 
-namespace :deploy do
+namespace :ubuntu do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
     on roles(:app) do
