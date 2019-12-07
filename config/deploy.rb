@@ -1,6 +1,6 @@
 lock '3.11.0'
 
-set :application, 'vitrinas-back-capistrano'
+set :application, 'vitrinas'
 set :repo_url, 'git@github.com:KedProgrammer/vitrinas-back.git'
 set :global_shared_files, %w(public/uploads)
 set :puma_threads,    [4, 16]
@@ -12,7 +12,7 @@ set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
-set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :deploy_to,       "/home/#{fetch(:user)}/var/www/#{fetch(:application)}"
 set :puma_user, fetch(:user)
     set :puma_rackup, -> { File.join(current_path, 'config.ru') }
     set :puma_state, "#{shared_path}/tmp/pids/puma.state"
