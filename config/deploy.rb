@@ -57,11 +57,12 @@ namespace :puma do
 end
 
 namespace :ubuntu do
-  desc "Make sure local git is in sync with remote."
+  desc 'Make sure local git is in sync with remote.'
+
   task :check_revision do
     on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/master`
-        puts "WARNING: HEAD is not the same as origin/master"
+      unless `git rev-parse HEAD` == `git rev-parse origin/#{fetch(:branch)}`
+        puts "WARNING: HEAD is not the same as origin/#{fetch(:branch)}"
         puts "Run `git push` to sync changes."
         exit
       end
@@ -71,10 +72,30 @@ namespace :ubuntu do
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
-      before 'deploy:restart', 'puma:start'
+      before 'deploy:restart', 'nginx:start', 'puma:nginx_config'
       invoke 'deploy'
     end
   end
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'nginx:restart'
+    end
+  end
+
+
+
+  task :tmp_folder do
+    on roles(:app) do
+      within '/tmp' do
+        execute :mkdir, '-p pids'
+        execute :mkdir, '-p sockets'
+      end
+    end
+  end
+
+
 
   desc "Restart Puma"
   task :restart_puma do
@@ -83,15 +104,39 @@ namespace :ubuntu do
     end
   end
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
+  desc "Restart sidekiq"
+  task :restart_sidekiq do
+    on roles(:sidekiq), in: :sequence, wait: 5 do
+      execute :sudo, :systemctl, :restart, :sidekiq
+      execute :sudo, :systemctl, :restart, :sidekiq_high
+      execute :sudo, :systemctl, :restart, :sidekiq_normal
+      execute :sudo, :systemctl, :restart, :sidekiq_low
     end
   end
 
-  before :starting,     :check_revision
-  after  :finishing,    :compile_assets
-  after  :finishing,    :cleanup
-  after  :finishing,    :restart_puma
+  before :starting,  :check_revision
+  after :finishing, :compile_assets
+  after :finishing, :cleanup
+  after :finishing, :restart
+  after :finishing, :tmp_folder
+  after  :finishing, :restart_puma
+  after  :finishing, :restart_sidekiq
+end
+
+namespace :log do
+  task :app do
+    on roles(:app) do
+      within current_path do
+        execute :bundle, :exec, "tail -f -n 500 log/#{fetch(:stage)}.log"
+      end
+    end
+  end
+
+  task :sidekiq do
+    on roles(:app) do
+      within current_path do
+        execute :bundle, :exec, "tail -f -n 500 log/sidekiq.log"
+      end
+    end
+  end
 end
