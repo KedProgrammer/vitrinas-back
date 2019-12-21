@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.6.5'
+ruby '2.5.1'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -24,6 +24,7 @@ gem 'unicorn'
 gem "sentry-raven"
 gem 'pry'
 gem 'aws'
+gem 'spreadsheet'
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

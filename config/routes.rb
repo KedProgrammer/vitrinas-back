@@ -28,20 +28,25 @@ Rails.application.routes.draw do
   scope module: :v1, constraints: ApiVersion.new('v1', true) do
     namespace :admin do
       resources :orders, only: %i[create index update]
+
       resources :products, only: [] do
         resources :row_materials, only: [] do
           resources :product_row_materials, only: [:create]
           resources :product_row_materials, only: %i[update destroy], shallow: true
         end
       end
+
       resources :category_row_materials, only: %i[index create] do
         resources :row_materials, only: [:create]
         resources :row_materials, only: %i[update destroy], shallow: true
       end
+
       resources :category_products, only: %i[index create] do
         resources :products, only: [:create]
         resources :products, only: %i[update destroy], shallow: true
       end
+
+      resources :reports, only: :index
     end
   end
   post 'auth/login', to: 'authentication#authenticate'

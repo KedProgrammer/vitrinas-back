@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
   include ExceptionHandler
   include Response
+  include ActionController::MimeResponds
   before_action :set_raven_context
 
   # called before every action on controllers
