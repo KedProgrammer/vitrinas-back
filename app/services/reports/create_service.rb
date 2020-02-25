@@ -19,8 +19,8 @@ module Reports
 
       category_product.products.each do |product|
         sheet1[index, 0] = product.name
-        sheet1[index, 1] = number_to_currency(product.cost.round, precision: 0)
-        sheet1[index, 2] = number_to_currency(product.price.round, precision: 0)
+        sheet1[index, 1] = number_to_currency(product.cost&.round, precision: 0)
+        sheet1[index, 2] = number_to_currency(product.price&.round, precision: 0)
         index += 1
       end
     end
