@@ -28,7 +28,7 @@ class V1::Admin::ProductsController < ApplicationController
 
 private 
 
-def product_params
-  params.require(:product).permit(:profit_rate, :name, :category_product_id, :code)
-end
+  def product_params
+    params.require(:product).permit(:profit_rate, :name, :category_product_id, :code, :image)
+  end
 end

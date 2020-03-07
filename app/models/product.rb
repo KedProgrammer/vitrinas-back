@@ -19,6 +19,7 @@ class Product < ApplicationRecord
   has_many :row_materials, through: :product_row_materials
   belongs_to :category_product
   before_update :update_price, if: Proc.new { |p| p.profit_rate_changed? }
+  mount_base64_uploader :image, ImageUploader
   serialize :row_material_summary, Array
 
   def calculate_cost
