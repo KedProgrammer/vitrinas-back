@@ -40,8 +40,6 @@ GEM
       activemodel (>= 4.1, < 6.1)
       case_transform (>= 0.2)
       jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
-    active_storage_base64 (0.1.4)
-      rails (~> 5.2)
     activejob (5.2.4.1)
       activesupport (= 5.2.4.1)
       globalid (>= 0.3.6)
@@ -1069,7 +1067,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (4.0.3)
-    puma (4.3.3)
+    puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.0.9)
     rack-cors (1.1.1)
@@ -1155,7 +1153,6 @@ PLATFORMS
 DEPENDENCIES
   aasm
   active_model_serializers
-  active_storage_base64
   annotate
   aws-sdk
   aws-sdk-s3
@@ -1171,7 +1168,6 @@ DEPENDENCIES
   carrierwave (~> 2.0)
   carrierwave-base64
   fog-aws
-  image_processing
   jwt
   listen (>= 3.0.5, < 3.2)
   pg
