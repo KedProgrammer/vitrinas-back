@@ -1,5 +1,5 @@
 module Reports
-  class CreateService < ApplicationService
+  class CreateProductService < ApplicationService
     def call
     index = 0
     book = Spreadsheet::Workbook.new
