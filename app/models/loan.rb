@@ -13,16 +13,23 @@
 #
 
 class Loan < ApplicationRecord
-  belongs_to :employee
-  validates :interes_rate,
+  belongs_to :employee, optional: true
+  has_many :fees
+  enum period_type: %i[weekly montly]
+  validates :interest_rate,
             :amount,
             :remaining_payment,
-            :paid_amount, presence: true
-  after_create :calculate_fee
+            :period_number, presence: true
+  before_create :calculate_fee, if: -> { weekly? }
+  before_create :set_remaining_payment
 
   private
 
   def calculate_fee
-    
+    self.interest_rate = (1 + interest_rate)**(1.fdiv(4)) - 1
+  end
+
+  def set_remaining_payment
+    self.remaining_payment = amount
   end
 end

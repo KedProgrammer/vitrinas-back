@@ -16,4 +16,5 @@
 
 class Fee < ApplicationRecord
   belongs_to :loan
+  enum status: %i[not_payed payed]
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_07_203036) do
+ActiveRecord::Schema.define(version: 2020_06_28_012919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,25 +31,27 @@ ActiveRecord::Schema.define(version: 2020_03_07_203036) do
 
   create_table "fees", force: :cascade do |t|
     t.decimal "value"
-    t.string "capital_payment"
-    t.string "decimal"
-    t.decimal "interes_rate"
-    t.decimal "balance"
+    t.decimal "interest_amount"
+    t.decimal "balance", precision: 20, scale: 10
     t.integer "fee_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "loan_id"
+    t.integer "status", default: 0, null: false
+    t.decimal "capital_payment", precision: 15, scale: 9
     t.index ["loan_id"], name: "index_fees_on_loan_id"
   end
 
   create_table "loans", force: :cascade do |t|
     t.decimal "amount", default: "0.0"
-    t.decimal "interes_rate", precision: 10, scale: 2, default: "0.0"
+    t.decimal "interest_rate", precision: 10, scale: 8, default: "0.0"
     t.decimal "remaining_payment", default: "0.0"
     t.decimal "paid_amount", default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "employee_id"
+    t.integer "period_number"
+    t.integer "period_type"
     t.index ["employee_id"], name: "index_loans_on_employee_id"
   end
 
