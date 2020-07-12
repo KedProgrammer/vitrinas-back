@@ -30,9 +30,7 @@ module Amortization
     private
 
     def fee_value
-      @value ||= -> {
-        ((amount * (1 + interest_rate) ** period * interest_rate) / ((1 + interest_rate) ** period - 1))
-      }.call
+      @fee_value ||= Fee.calculate_fee(amount, interest_rate, period)
     end
   end
 end

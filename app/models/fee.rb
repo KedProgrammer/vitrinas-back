@@ -17,4 +17,8 @@
 class Fee < ApplicationRecord
   belongs_to :loan
   enum status: %i[not_payed payed]
+
+  def self.calculate_fee(amount, interest_rate, period)
+    ((amount * (1 + interest_rate)**period * interest_rate) / ((1 + interest_rate)**period - 1))
+  end
 end
