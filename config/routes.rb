@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       resources :product_reports, only: :index
       resources :row_material_reports, only: :index
       resources :loans, only: :create
+      resources :employers, only: %i[create index update]
     end
   end
   post 'auth/login', to: 'authentication#authenticate'

@@ -16,6 +16,10 @@ module ExceptionHandler
     rescue_from ActiveRecord::RecordNotFound do |e|
       json_response({ message: e.message }, :not_found)
     end
+
+    rescue_from ActiveRecord::NotNullViolation do |e|
+      json_response({ message: e.message }, :not_found)
+    end
   end
 
   private
