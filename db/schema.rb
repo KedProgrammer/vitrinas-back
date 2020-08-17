@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_15_185136) do
+ActiveRecord::Schema.define(version: 2020_08_17_001012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2020_08_15_185136) do
     t.bigint "employee_id"
     t.integer "period_number"
     t.integer "period_type"
+    t.decimal "fee_value", default: "0.0", null: false
     t.index ["employee_id"], name: "index_loans_on_employee_id"
   end
 

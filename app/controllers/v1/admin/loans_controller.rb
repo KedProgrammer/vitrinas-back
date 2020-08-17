@@ -5,6 +5,11 @@ class V1::Admin::LoansController < V1::Admin::OrdersController
     render json: loan
   end
 
+  def index
+    loans = Loan.includes(:employee)
+    render json: loans
+  end
+
   private
   def loan_params
     params.require(:loan).permit(:amount, :interes_rate, :period_type, :period_number)

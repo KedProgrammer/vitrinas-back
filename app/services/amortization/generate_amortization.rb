@@ -24,6 +24,7 @@ module Amortization
           balance: virtual_remaining_payment }
       end
 
+      loan.update(fee_value: fee_value)
       loan.fees.create(fees)
     end
 

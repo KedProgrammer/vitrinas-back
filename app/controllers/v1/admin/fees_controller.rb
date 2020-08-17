@@ -5,6 +5,12 @@ class V1::Admin::FeesController < ApplicationController
     render json: fee
   end
 
+  def index
+    loan = Loan.find(params[:loan_id])
+    fees = loan.fees
+    render json: fees
+  end
+
   private
 
   def fee_params

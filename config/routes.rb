@@ -48,7 +48,11 @@ Rails.application.routes.draw do
 
       resources :product_reports, only: :index
       resources :row_material_reports, only: :index
-      resources :loans, only: :create
+
+      resources :loans, only: %i[create index] do
+        resources :fees, only: [:index]
+      end
+
       resources :employers, only: %i[create index update]
     end
   end
