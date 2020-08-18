@@ -27,6 +27,10 @@ class LoanSerializer < ActiveModel::Serializer
     number_to_currency(object.amount - object.remaining_payment, precision: 0)
   end
 
+  def fee_value
+    number_to_currency(object.fee_value, precision: 0)
+  end
+
   class EmployeeSerializer < ActiveModel::Serializer
     attributes  :name,
                 :last_name,

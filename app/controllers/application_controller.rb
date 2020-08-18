@@ -3,6 +3,7 @@ class ApplicationController < ActionController::API
   include Response
   include ActionController::MimeResponds
   require 'base64'
+  include ActionView::Helpers::NumberHelper
   before_action :set_raven_context
 
   # called before every action on controllers

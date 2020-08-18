@@ -15,6 +15,7 @@
 #
 
 class Fee < ApplicationRecord
+  default_scope { order(:id) }
   belongs_to :loan
   enum status: %i[not_payed payed]
 

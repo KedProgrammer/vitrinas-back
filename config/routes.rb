@@ -49,11 +49,17 @@ Rails.application.routes.draw do
       resources :product_reports, only: :index
       resources :row_material_reports, only: :index
 
-      resources :loans, only: %i[create index] do
+      resources :loans, only: %i[index] do
         resources :fees, only: [:index]
       end
 
-      resources :employers, only: %i[create index update]
+      resources :fees, only: [] do
+        get :value, on: :collection
+      end
+
+      resources :employers, only: %i[create index update] do
+        resources :loans, only: [:create]
+      end
     end
   end
   post 'auth/login', to: 'authentication#authenticate'

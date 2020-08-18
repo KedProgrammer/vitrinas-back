@@ -1,7 +1,7 @@
 class V1::Admin::LoansController < V1::Admin::OrdersController
   def create
-    loan = Loan.create(loan_params)
-    Loan::GenerateAmortization.call(loan)
+    employee = Employee.find(params[:employer_id])
+    loan = employee.loans.create(loan_params)
     render json: loan
   end
 
@@ -12,6 +12,6 @@ class V1::Admin::LoansController < V1::Admin::OrdersController
 
   private
   def loan_params
-    params.require(:loan).permit(:amount, :interes_rate, :period_type, :period_number)
+    params.require(:loan).permit(:amount, :interest_rate, :period_type, :period_number)
   end
 end
