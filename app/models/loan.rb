@@ -22,7 +22,7 @@ class Loan < ApplicationRecord
             :period_number, presence: true
   before_create :calculate_weekly_interest_rate, if: -> { weekly? }
   before_create :set_period_number
-  before_validation :set_remaining_payment
+  before_validation :set_remaining_payment, on: :create
   after_create :generate_amortization
 
   def self.weekly_interest_rate(interest_rate)

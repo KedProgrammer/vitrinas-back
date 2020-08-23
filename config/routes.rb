@@ -55,6 +55,7 @@ Rails.application.routes.draw do
 
       resources :fees, only: [] do
         get :value, on: :collection
+        post :pay_fees, on: :collection
       end
 
       resources :employers, only: %i[create index update] do

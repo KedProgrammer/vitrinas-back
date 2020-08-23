@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_001012) do
+ActiveRecord::Schema.define(version: 2020_08_23_013307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2020_08_17_001012) do
     t.bigint "loan_id"
     t.integer "status", default: 0, null: false
     t.decimal "capital_payment", precision: 15, scale: 9
+    t.date "payment_date"
     t.index ["loan_id"], name: "index_fees_on_loan_id"
   end
 
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_08_17_001012) do
     t.integer "period_number"
     t.integer "period_type"
     t.decimal "fee_value", default: "0.0", null: false
+    t.bigint "total_payed"
     t.index ["employee_id"], name: "index_loans_on_employee_id"
   end
 

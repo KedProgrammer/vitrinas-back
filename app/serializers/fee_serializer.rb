@@ -6,7 +6,8 @@ class FeeSerializer < ActiveModel::Serializer
             :balance,
             :fee_number,
             :status,
-            :capital_payment
+            :capital_payment,
+            :payment_date
 
   def value
     number_to_currency(object.value, precision: 0)
@@ -22,5 +23,9 @@ class FeeSerializer < ActiveModel::Serializer
 
   def balance
     number_to_currency(object.balance, precision: 0)
+  end
+
+  def status
+    "#{I18n.t("activerecord.attributes.fee.statuses.#{object.status}")}"
   end
 end

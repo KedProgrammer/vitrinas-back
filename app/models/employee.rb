@@ -11,5 +11,5 @@
 
 class Employee < ApplicationRecord
   has_many :loans
-  validates :name, :age, :identification, :job_position, :last_name, :cellphone, :initial_date, :email, presence: true, allow_blank: true
+  validates :name, :last_name, presence: true
 end

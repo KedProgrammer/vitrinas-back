@@ -9,10 +9,12 @@ class LoanSerializer < ActiveModel::Serializer
             :fee_value,
             :period_type,
             :employee,
-            :capital_total
-
+            :capital_total,
+            :total_payed
+      
   def interest_rate
-    (object.interest_rate * 100).round
+    i = (object.interest_rate * 100).round
+    i * 4 if object.weekly?
   end
 
   def amount
@@ -31,10 +33,19 @@ class LoanSerializer < ActiveModel::Serializer
     number_to_currency(object.fee_value, precision: 0)
   end
 
+  def total_payed
+    number_to_currency(object.total_payed, precision: 0)
+  end
+
+  def period_type
+    "#{I18n.t("activerecord.attributes.loan.period_types.#{object.period_type}")}"
+  end
+
   class EmployeeSerializer < ActiveModel::Serializer
     attributes  :name,
                 :last_name,
                 :identification,
-                :cellphone
+                :cellphone,
+                :id
   end
 end
