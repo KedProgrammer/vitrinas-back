@@ -49,8 +49,11 @@ Rails.application.routes.draw do
       resources :product_reports, only: :index
       resources :row_material_reports, only: :index
 
-      resources :loans, only: %i[index] do
-        resources :fees, only: [:index]
+      resources :loans, only: %i[index destroy] do
+        resources :fees, only: [:index] do
+          post :pay_fee, on: :collection
+          post :rollback_fee, on: :collection
+        end
       end
 
       resources :fees, only: [] do
