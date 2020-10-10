@@ -64,6 +64,8 @@ Rails.application.routes.draw do
       resources :employers, only: %i[create index update] do
         resources :loans, only: [:create]
       end
+
+      resources :loan_reports, only: :create
     end
   end
   post 'auth/login', to: 'authentication#authenticate'
