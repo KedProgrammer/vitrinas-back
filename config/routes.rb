@@ -23,7 +23,11 @@
 #                                       auth_login POST   /auth/login(.:format)                                                                      authentication#authenticate
 #                                           signup POST   /signup(.:format)                                                                          users#create
 
+require 'sidekiq/web'
+Sidekiq::Web.app_url = '/'
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   scope module: :v1, constraints: ApiVersion.new('v1', true) do
     namespace :admin do
