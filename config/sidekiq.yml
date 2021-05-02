@@ -2,3 +2,4 @@
   - critical
   - default
   - mailers
+:logfile: ./log/sidekiq_logs.log
