@@ -81,4 +81,14 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.action_mailer.smtp_settings = {
+    :address => "email-smtp.us-east-1.amazonaws.com",
+    :port => 587, # Port 25 is throttled on AWS
+    :user_name =>  Rails.application.credentials[:user_name_ses], # Your SMTP user here.
+    :password => Rails.application.credentials[:password_ses], # Your SMTP password here.
+    :authentication => :login,
+    :enable_starttls_auto => true
+  }
+
+  config.active_job.queue_adapter = :sidekiq
 end

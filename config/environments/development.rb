@@ -47,8 +47,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address => "email-smtp.us-east-1.amazonaws.com",
     :port => 587, # Port 25 is throttled on AWS
-    :user_name => "AKIAVCZRVTOVC74TK4XQ", # Your SMTP user here.
-    :password => "BCnfbG2Kl1XidPpqZQiPbGh3iIEnnKFxQyCNZSpedx/C", # Your SMTP password here.
+    :user_name =>  Rails.application.credentials[:user_name_ses]    , # Your SMTP user here.
+    :password => Rails.application.credentials[:password_ses]    , # Your SMTP password here.
     :authentication => :login,
     :enable_starttls_auto => true
   }
