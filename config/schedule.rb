@@ -1,3 +1,3 @@
-every :day, at: '3:05pm' do # Use any day of the week or :weekend, :weekday
-  runner 'EmailLog.create'
+every 1.minute do # Use any day of the week or :weekend, :weekday
+  rake "create_log"
 end
