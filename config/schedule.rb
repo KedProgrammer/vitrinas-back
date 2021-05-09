@@ -1,4 +1,3 @@
-every 1.minutes do # Use any day of the week or :weekend, :weekday
-  runner 'Reports::CreateLoansSummaryService.call'
-  command 'echo "hola mundo"'
+every 1.minute do # Use any day of the week or :weekend, :weekday
+  runner 'EmailLog.create'
 end
