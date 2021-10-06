@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_08_03_030048) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "loan_id"
-    t.date "initial_date", default: "2020-08-15", null: false
+    t.date "initial_date", default: "2021-09-03", null: false
     t.string "email", default: "", null: false
     t.string "cellphone", default: "", null: false
     t.string "last_name", default: "", null: false
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2021_08_03_030048) do
     t.datetime "updated_at", null: false
     t.bigint "loan_id"
     t.integer "status", default: 0, null: false
-    t.decimal "capital_payment", precision: 15, scale: 9
+    t.decimal "capital_payment", precision: 20, scale: 9
     t.date "payment_date"
     t.index ["loan_id"], name: "index_fees_on_loan_id"
   end

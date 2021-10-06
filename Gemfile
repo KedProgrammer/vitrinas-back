@@ -48,14 +48,7 @@ gem 'whenever'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'capistrano', '~> 3.11'
-  gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4', require: false
-  gem 'capistrano-bundler', '~> 1.5', require: false
-  gem 'capistrano-rails', '~> 1.4', require: false
-  gem 'capistrano3-puma', github: "seuros/capistrano-puma"
-  gem 'capistrano3-nginx', '~> 3.0', '>= 3.0.1', require: false
-  gem 'capistrano-sidekiq', '~> 1.0', '>= 1.0.2', require: false
-  gem 'capistrano-rails-console', '~> 2.3', require: false
+
 end
 
 group :development do
@@ -68,3 +61,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
+gem 'capistrano', '~> 3.11'
+gem 'capistrano-rails', '~> 1.4'
+gem 'capistrano-passenger', '~> 0.2.0'
+gem 'capistrano-rbenv', '~> 2.1' , '>= 2.1.4'

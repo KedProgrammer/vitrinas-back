@@ -5,15 +5,6 @@ GIT
   specs:
     mimemagic (0.3.5)
 
-GIT
-  remote: https://github.com/seuros/capistrano-puma.git
-  revision: 87bfd747bd43a19b5d214e0272b76fb723cf1f5f
-  specs:
-    capistrano3-puma (4.0.0)
-      capistrano (~> 3.7)
-      capistrano-bundler
-      puma (~> 4.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -992,20 +983,14 @@ GEM
       sshkit (>= 1.9.0)
     capistrano-bundler (1.6.0)
       capistrano (~> 3.1)
+    capistrano-passenger (0.2.1)
+      capistrano (~> 3.0)
     capistrano-rails (1.5.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
-    capistrano-rails-console (2.3.0)
-      capistrano (>= 3.5.0, < 4.0.0)
-      sshkit-interactive (~> 0.3.0)
     capistrano-rbenv (2.1.6)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
-    capistrano-sidekiq (1.0.3)
-      capistrano (>= 3.9.0)
-      sidekiq (>= 3.4, < 6.0)
-    capistrano3-nginx (3.0.4)
-      capistrano (~> 3.0)
     carrierwave (2.1.0)
       activemodel (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -1157,8 +1142,6 @@ GEM
     sshkit (1.21.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    sshkit-interactive (0.3.0)
-      sshkit (~> 1.12)
     thor (1.0.1)
     thread_safe (0.3.6)
     tzinfo (1.2.7)
@@ -1175,6 +1158,7 @@ GEM
 PLATFORMS
   ruby
   x86_64-darwin-19
+  x86_64-linux
 
 DEPENDENCIES
   aasm
@@ -1184,13 +1168,9 @@ DEPENDENCIES
   aws-sdk-s3
   bcrypt
   capistrano (~> 3.11)
-  capistrano-bundler (~> 1.5)
+  capistrano-passenger (~> 0.2.0)
   capistrano-rails (~> 1.4)
-  capistrano-rails-console (~> 2.3)
   capistrano-rbenv (~> 2.1, >= 2.1.4)
-  capistrano-sidekiq (~> 1.0, >= 1.0.2)
-  capistrano3-nginx (~> 3.0, >= 3.0.1)
-  capistrano3-puma!
   carrierwave (~> 2.0)
   carrierwave-base64
   fog-aws
