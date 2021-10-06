@@ -37,3 +37,21 @@ set :keep_releases, 5
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+
+
+namespace :rails do
+  desc "Remote console"
+  task :console, :roles => :app do
+    run_interactively "bundle exec rails console #{rails_env}"
+  end
+
+  desc "Remote dbconsole"
+  task :dbconsole, :roles => :app do
+    run_interactively "bundle exec rails dbconsole #{rails_env}"
+  end
+end
+
+def run_interactively(command)
+  server ||= find_servers_for_task(current_task).first
+  exec %Q(ssh #{user}@#{myproductionhost} -t '#{command}')
+end
