@@ -24,7 +24,7 @@ set :deploy_to, "/home/deploy/#{fetch :application}"
 append :linked_files, 'config/master.key', 'config/application.yml', 'config/database.yml'
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", ".bundle", "public/system", "public/uploads"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", ".bundle", "public/system", "public/uploads", "tmp/exports"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -37,21 +37,12 @@ set :keep_releases, 5
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
-
-
-namespace :rails do
-  desc "Remote console"
-  task :console, :roles => :app do
-    run_interactively "bundle exec rails console #{rails_env}"
+namespace :log do
+  task :app do
+    on roles(:web) do
+      within current_path do
+        execute :bundle, :exec, "tail -f -n 500 log/#{fetch(:stage)}.log"
+      end
+    end
   end
-
-  desc "Remote dbconsole"
-  task :dbconsole, :roles => :app do
-    run_interactively "bundle exec rails dbconsole #{rails_env}"
-  end
-end
-
-def run_interactively(command)
-  server ||= find_servers_for_task(current_task).first
-  exec %Q(ssh #{user}@#{myproductionhost} -t '#{command}')
 end
