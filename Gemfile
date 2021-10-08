@@ -31,6 +31,7 @@ gem "fog-aws"
 gem 'carrierwave-base64'
 gem 'sidekiq'
 gem 'whenever'
+gem 'capistrano-sidekiq'
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -66,4 +67,3 @@ gem 'capistrano-rails', '~> 1.4'
 gem 'capistrano-passenger', '~> 0.2.0'
 gem 'capistrano-rbenv', '~> 2.1' , '>= 2.1.4'
 gem 'capistrano-rails-console', require: false
-gem 'capistrano-sidekiq'
