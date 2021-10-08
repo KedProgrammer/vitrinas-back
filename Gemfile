@@ -26,7 +26,7 @@ gem 'pry'
 gem 'spreadsheet'
 gem 'aws-sdk'
 gem 'aws-sdk-s3'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 gem "fog-aws"
 gem 'carrierwave-base64'
 gem 'sidekiq'
